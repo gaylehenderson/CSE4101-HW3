@@ -4,20 +4,25 @@ def stableMatching(advisorPreferences,studentPreferences):
     advisorAssignment = {} #advisor id to student
     studentAssignment = {} #student id to advisor
 
-    freeAdvisors = list[advisorAssignment]
-    nextIndex = {a: a=0; for a in freeAdvisors}
+    freeAdvisors = list(advisorPreferences)
+    nextIndex = {a: 0 for a in freeAdvisors}
 
     while freeAdvisors:
-        freeAdvisors = freeAdvisors - 1;
-        if advisorAssignment[studentAssignment[i]]:
-            if advisorAssignment[i+1] > advisorAssignment[i]:
-                freeAdvisors[i] = zip(advisorAssignment(advisorPreferences), studentAssignment(studentPreferences))
-            i+=1;
-    if s not in studentAssignment:
+        a = freeAdvisors.pop()
+        s = advisorPreferences[a][nextIndex[a]]
+        nextIndex[a] += 1
 
-        else 
-        advisorAssignment.index()   
-    
-
+        if s not in studentAssignment:
+            studentAssignment[s] = a #match them, update both dictionaires
+            advisorAssignment[a] = s
+        else:
+            current = studentAssignment[s] #prefers smaller index in studetPrefences[s]
+            if studentPreferences[s].index(a) < studentPreferences[s].index(current):  #if the next index is a better matching than this one
+                studentAssignment[s] = a
+                advisorAssignment[a] = s
+                del advisorAssignment[current]
+                freeAdvisors.append(current)
+            else: 
+                freeAdvisors.append(a)
 
     return [advisorAssignment, studentAssignment]
